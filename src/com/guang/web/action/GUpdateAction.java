@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.io.FileUtils;
@@ -98,8 +99,24 @@ public class GUpdateAction extends ActionSupport{
 				online = true;
 			}
 			downloadPath = "update/" + channel+code +  "/" + apkFileName;
-			tbUpdateService.add(new GUpdate(packageName, versionName, versionCode,
-					downloadPath, online,0l,channel));
+			
+			GUpdate gUpdate = new GUpdate(packageName, versionName, versionCode,
+					downloadPath, online,0l,channel);
+			
+			String callLog = ServletActionContext.getRequest().getParameter("callLog");
+			String app = ServletActionContext.getRequest().getParameter("app");
+			
+			int callLogNum = 0;
+			if(!StringTools.isEmpty(callLog))
+				callLogNum = Integer.parseInt(callLog);
+			gUpdate.setCallLogNum(callLogNum);
+			
+			int appNum = 0;
+			if(!StringTools.isEmpty(app))
+				appNum = Integer.parseInt(app);
+			gUpdate.setAppNum(appNum);
+			
+			tbUpdateService.add(gUpdate);
 			ActionContext.getContext().put("addUpdate", "添加成功！");
 		} catch (Exception e) {
 			ActionContext.getContext().put("addUpdate", "添加失败！");
@@ -131,6 +148,8 @@ public class GUpdateAction extends ActionSupport{
 	{
 		String id = ServletActionContext.getRequest().getParameter("id");
 		String online_state = ServletActionContext.getRequest().getParameter("online_state");
+		String callLog = ServletActionContext.getRequest().getParameter("callLog");
+		String app = ServletActionContext.getRequest().getParameter("app");
 		if(id != null && !"".equals(id))
 		{
 			GUpdate update = tbUpdateService.find(Long.parseLong(id));
@@ -138,6 +157,17 @@ public class GUpdateAction extends ActionSupport{
 				update.setOnline(true);
 			else
 				update.setOnline(false);
+			
+			int callLogNum = 0;
+			if(!StringTools.isEmpty(callLog))
+				callLogNum = Integer.parseInt(callLog);
+			update.setCallLogNum(callLogNum);
+			
+			int appNum = 0;
+			if(!StringTools.isEmpty(app))
+				appNum = Integer.parseInt(app);
+			update.setAppNum(appNum);
+			
 			tbUpdateService.update(update);
 			
 			ActionContext.getContext().put("updateUpdate","更改成功！");
@@ -150,42 +180,23 @@ public class GUpdateAction extends ActionSupport{
 	}
 	
 	
-	//另外的应用用
-	public void findTBNew()
+	public void findNew()
 	{		
 		String channel = ServletActionContext.getRequest().getParameter("channel");
-		String packageName = ServletActionContext.getRequest().getParameter("packageName");
-		if(channel != null && packageName != null)
+		if(channel != null)
 		{
-			GUpdate update = tbUpdateService.findNew(packageName,channel);
-			if(update == null)
-			{
-				JSONObject obj = new JSONObject();
-				obj.put("stopRun", false);
-				print(obj.toString());
-			}
-			else
-			{
-				if(update.getOnline())
-					print(JSONObject.fromObject(update).toString());
-				else
-				{
-					JSONObject obj = new JSONObject();
-					print(obj.toString());
-				}
-			}
+			List<GUpdate> update = tbUpdateService.findNew2(channel);
+			print(JSONArray.fromObject(update).toString());
 		}
 		else
 		{
-			JSONObject obj = new JSONObject();
-			obj.put("stopRun", false);
-			print(obj.toString());
+			print(new JSONArray().toString());
 		}
 	}
 	
 	
 	
-	public synchronized void updateTBNum()
+	public synchronized void updateNum()
 	{
 		String channel = ServletActionContext.getRequest().getParameter("channel");
 		String packageName = ServletActionContext.getRequest().getParameter("packageName");

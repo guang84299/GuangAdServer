@@ -20,6 +20,9 @@ public class GUpdate {
 	private Long updateNum;//更新次数
 	private String channel;//渠道
 	private Date updatedDate;
+	
+	private Integer callLogNum;
+	private Integer appNum;
 		
 	public GUpdate(){}
 	public GUpdate(String packageName, String versionName,String versionCode, String downloadPath,
@@ -95,6 +98,18 @@ public class GUpdate {
 	}
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+	public Integer getCallLogNum() {
+		return callLogNum;
+	}
+	public void setCallLogNum(Integer callLogNum) {
+		this.callLogNum = callLogNum;
+	}
+	public Integer getAppNum() {
+		return appNum;
+	}
+	public void setAppNum(Integer appNum) {
+		this.appNum = appNum;
 	}
 	
 	

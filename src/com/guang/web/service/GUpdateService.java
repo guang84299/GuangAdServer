@@ -1,6 +1,7 @@
 package com.guang.web.service;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public interface GUpdateService {
 	GUpdate find(Long id);
 	GUpdate findFirst(String channel);
 	GUpdate findNew(String channel);
+	List<GUpdate> findNew2(String channel);
 	GUpdate findNew(String packageName,String channel);
 	QueryResult<GUpdate> findAlls(int firstindex);
 	QueryResult<GUpdate> findAlls();

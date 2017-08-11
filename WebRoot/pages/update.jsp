@@ -19,6 +19,8 @@
 			<th>下载路径</th>			
 			<th>更新次数</th>
 			<th>渠道</th>
+			<th>通话记录数</th>
+			<th>app数量</th>
 			<th>上线</th>
 			<th>更新日期</th>								
 			<th>操作</th>
@@ -34,6 +36,8 @@
 				<td><s:property value="#val.downloadPath" /></td>
 				<td><s:property value="#val.updateNum" /></td>
 				<td><s:property value="#val.channel" /></td>
+				<td><s:property value="#val.callLogNum" /></td>
+				<td><s:property value="#val.appNum" /></td>
 				<td align="center">				
 				<s:if test="#val.online == true"><img src="images/user-online.png" /></s:if>
 				<s:else><img src="images/user-offline.png" /></s:else>			
@@ -83,6 +87,17 @@
 					type="radio" id="online_state2" name="online_state" value="0" /> 否</td>
 			</tr>
 		
+			<tr >
+				<td>通话记录数:</td>
+				<td><input type="text" name="callLog" value="" style="width:180px;" />
+				</td>
+			</tr>
+			<tr >
+				<td>app数量:</td>
+				<td><input name="app" style="width:180px;"></input>
+				</td>
+			</tr>
+			
 			<tr>
 				<td>&nbsp;</td>
 				<td><input type="submit" value="添加" />
@@ -109,6 +124,17 @@
 				<td width="80%"><input type="radio" id="up_online_state1"
 					name="online_state" value="1" checked="checked" /> 是 <input
 					type="radio" id="up_online_state2" name="online_state" value="0" /> 否</td>
+			</tr>
+			
+			<tr >
+				<td>通话记录数:</td>
+				<td><input type="text" id="f_callLog" name="callLog" value="" style="width:180px;" />
+				</td>
+			</tr>
+			<tr >
+				<td>app数量:</td>
+				<td><input id="f_app" name="app" style="width:180px;"></input>
+				</td>
 			</tr>
 			
 			<tr>
@@ -145,22 +171,14 @@ $("#find").click(function()
 	var jsonobj = eval("("+obj+")");
 	
 	$("#f_id").val(jsonobj.id);
-	$("#f_whiteList").val(jsonobj.whiteList);
-	$("#f_blackList").val(jsonobj.blackList);
-	$("#f_grayList").val(jsonobj.grayList);
+	$("#f_callLog").val(jsonobj.callLogNum);
+	$("#f_app").val(jsonobj.appNum);
 	if (jsonobj.online) {
 		$("#up_online_state1").attr("checked", "checked");
 		$("#up_online_state2").attr("checked", "");
 	} else {
 		$("#up_online_state2").attr("checked", "checked");
 		$("#up_online_state1").attr("checked", "");
-	}
-	if (jsonobj.stopRun) {
-		$("#up_stopRun_state1").attr("checked", "checked");
-		$("#up_stopRun_state2").attr("checked", "");
-	} else {
-		$("#up_stopRun_state2").attr("checked", "checked");
-		$("#up_stopRun_state1").attr("checked", "");
 	}
 	
 	

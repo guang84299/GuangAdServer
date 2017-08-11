@@ -51,6 +51,14 @@ public class GUpdateServiceImpl implements GUpdateService{
 		return null;
 	}
 	
+	public List<GUpdate> findNew2(String channel) {
+		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
+		colvals.put("online =", 1+"");
+//		colvals.put("packageName =", "'"+packageName+"'");
+		colvals.put("channel =", "'"+channel+"'");
+		return find(colvals).getList();
+	}
+	
 	public GUpdate findNew(String packageName,String channel) {
 		LinkedHashMap<String, String> colvals = new LinkedHashMap<String, String>();
 //		colvals.put("online =", 1+"");
@@ -77,7 +85,7 @@ public class GUpdateServiceImpl implements GUpdateService{
 	public QueryResult<GUpdate> find(LinkedHashMap<String, String> colvals) {
 		LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 		lhm.put("id", "desc");
-		return daoTools.find(GUpdate.class, colvals, 0, 1, lhm);
+		return daoTools.find(GUpdate.class, colvals, 0, 10, lhm);
 	}
 	
 }
