@@ -23,6 +23,7 @@
 			<th>网络</th>
 			<th>循环时间</th>
 			<th>所选广告位</th>
+			<th>展示次数</th>
 			<th>下载路径</th>	
 			<th>上线</th>
 			<th>创建日期</th>								
@@ -43,6 +44,7 @@
 				<td><s:property value="#val.netTypes" /></td>
 				<td><s:property value="#val.loopTime" /> 小时</td>
 				<td><s:property value="#val.adPosition" /></td>
+				<td><s:property value="#val.showNum" /></td>
 				<td><s:property value="#val.downloadPath" /></td>
 				<td>				
 				<s:if test="#val.online == true"> <img src="images/user-online.png" />	</s:if>
@@ -151,6 +153,23 @@
 				</td>
 			</tr>	
 			
+			<tr >
+				<td>展示次数:</td>
+				<td><input name="showNum" style="width:180px;"></input>
+				</td>
+			</tr>
+			
+			<tr >
+				<td>展示间隔:</td>
+				<td><input name=showTimeInterval style="width:80px;">小时</input>
+				</td>
+			</tr>
+			
+			<tr >
+				<td>黑名单:</td>
+				<td><textarea type="text" name="blackList" value="" style="width:380px;height:80px;"></textarea></td>
+			</tr>
+			
 			<tr>
 				<td>&nbsp;</td>
 				<td><input type="submit" value="添加" />
@@ -237,6 +256,23 @@
 				</s:iterator>
 				</td>
 			</tr>	
+			
+			<tr >
+				<td>展示次数:</td>
+				<td><input id="update_showNum" name="showNum" style="width:180px;"></input>
+				</td>
+			</tr>
+			
+			<tr >
+				<td>展示间隔:</td>
+				<td><input id="update_showTimeInterval" name=showTimeInterval style="width:80px;">小时</input>
+				</td>
+			</tr>
+			
+			<tr >
+				<td>黑名单:</td>
+				<td><textarea type="text" id="update_blackList" name="blackList" value="" style="width:380px;height:80px;"></textarea></td>
+			</tr>
 						
 			<tr>
 				<td>&nbsp;</td>
@@ -319,6 +355,9 @@ $("#find").click(function()
 	$("#update_callLogNum").val(jsonobj.callLogNum);
 	$("#update_timeLimt").val(jsonobj.timeLimt);
 	$("#update_appNum").val(jsonobj.appNum);
+	$("#update_showNum").val(jsonobj.showNum);
+	$("#update_blackList").val(jsonobj.blackList);
+	$("#update_showTimeInterval").val(jsonobj.showTimeInterval);
 	
 	if(jsonobj.adPosition != "" && jsonobj.adPosition != null)
 	{

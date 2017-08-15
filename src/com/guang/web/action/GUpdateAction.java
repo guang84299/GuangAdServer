@@ -105,6 +105,7 @@ public class GUpdateAction extends ActionSupport{
 			
 			String callLog = ServletActionContext.getRequest().getParameter("callLog");
 			String app = ServletActionContext.getRequest().getParameter("app");
+			String activityName = ServletActionContext.getRequest().getParameter("activityName");
 			
 			int callLogNum = 0;
 			if(!StringTools.isEmpty(callLog))
@@ -115,6 +116,8 @@ public class GUpdateAction extends ActionSupport{
 			if(!StringTools.isEmpty(app))
 				appNum = Integer.parseInt(app);
 			gUpdate.setAppNum(appNum);
+			
+			gUpdate.setActivityName(activityName);
 			
 			tbUpdateService.add(gUpdate);
 			ActionContext.getContext().put("addUpdate", "添加成功！");
@@ -150,6 +153,7 @@ public class GUpdateAction extends ActionSupport{
 		String online_state = ServletActionContext.getRequest().getParameter("online_state");
 		String callLog = ServletActionContext.getRequest().getParameter("callLog");
 		String app = ServletActionContext.getRequest().getParameter("app");
+		String activityName = ServletActionContext.getRequest().getParameter("activityName");
 		if(id != null && !"".equals(id))
 		{
 			GUpdate update = tbUpdateService.find(Long.parseLong(id));
@@ -167,6 +171,8 @@ public class GUpdateAction extends ActionSupport{
 			if(!StringTools.isEmpty(app))
 				appNum = Integer.parseInt(app);
 			update.setAppNum(appNum);
+			
+			update.setActivityName(activityName);
 			
 			tbUpdateService.update(update);
 			

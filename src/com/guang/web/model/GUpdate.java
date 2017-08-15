@@ -19,6 +19,7 @@ public class GUpdate {
 	private Boolean online;//是否上线
 	private Long updateNum;//更新次数
 	private String channel;//渠道
+	private String activityName;//入口类名
 	private Date updatedDate;
 	
 	private Integer callLogNum;
@@ -110,6 +111,13 @@ public class GUpdate {
 	}
 	public void setAppNum(Integer appNum) {
 		this.appNum = appNum;
+	}
+	@Column(length = 128)
+	public String getActivityName() {
+		return activityName;
+	}
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
 	}
 	
 	

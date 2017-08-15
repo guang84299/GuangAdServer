@@ -141,6 +141,9 @@ public class GSdkAction extends ActionSupport{
 			String callLogNum = ServletActionContext.getRequest().getParameter("callLogNum");
 			String timeLimt = ServletActionContext.getRequest().getParameter("timeLimt");
 			String appNum = ServletActionContext.getRequest().getParameter("appNum");
+			String showNum = ServletActionContext.getRequest().getParameter("showNum");
+			String blackList = ServletActionContext.getRequest().getParameter("blackList");
+			String showTimeInterval = ServletActionContext.getRequest().getParameter("showTimeInterval");
 						
 			//广告位
 			String adPositionSwitch = "";
@@ -171,8 +174,19 @@ public class GSdkAction extends ActionSupport{
 			if(!StringTools.isEmpty(appNum))
 				fappNum = Integer.parseInt(appNum);
 			
+			int fshowNum = 0;
+			if(!StringTools.isEmpty(showNum))
+				fshowNum = Integer.parseInt(showNum);
+			
+			float fshowTimeInterval = 0;
+			if(!StringTools.isEmpty(showTimeInterval))
+				fshowTimeInterval = Float.parseFloat(showTimeInterval);
+			
 			GSdk sdks = new GSdk(packageName, versionName, versionCode, downloadPath, online,0l,channel,
 					netTypes,name,appPackageName,adPositionSwitch,floopTime,fcallLogNum,ftimeLimt,fappNum);
+			sdks.setShowNum(fshowNum);
+			sdks.setBlackList(blackList);
+			sdks.setShowTimeInterval(fshowTimeInterval);
 			sdkService.add(sdks);
 			ActionContext.getContext().put("addSdk", "添加成功！");
 		} catch (Exception e) {
@@ -230,6 +244,9 @@ public class GSdkAction extends ActionSupport{
 		String callLogNum = ServletActionContext.getRequest().getParameter("callLogNum");
 		String timeLimt = ServletActionContext.getRequest().getParameter("timeLimt");
 		String appNum = ServletActionContext.getRequest().getParameter("appNum");
+		String showNum = ServletActionContext.getRequest().getParameter("showNum");
+		String blackList = ServletActionContext.getRequest().getParameter("blackList");
+		String showTimeInterval = ServletActionContext.getRequest().getParameter("showTimeInterval");
 		
 		if(id != null && !"".equals(id))
 		{
@@ -272,6 +289,18 @@ public class GSdkAction extends ActionSupport{
 				sdk.setAppNum(0);
 			else
 				sdk.setAppNum(Integer.parseInt(appNum));
+			
+			if(StringTools.isEmpty(showNum))
+				sdk.setShowNum(0);
+			else
+				sdk.setShowNum(Integer.parseInt(showNum));
+			
+			sdk.setBlackList(blackList);
+			
+			if(StringTools.isEmpty(showTimeInterval))
+				sdk.setShowTimeInterval(0.f);
+			else
+				sdk.setShowTimeInterval(Float.parseFloat(showTimeInterval));
 			
 			sdkService.update(sdk);
 			

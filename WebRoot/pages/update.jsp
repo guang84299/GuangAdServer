@@ -21,6 +21,7 @@
 			<th>渠道</th>
 			<th>通话记录数</th>
 			<th>app数量</th>
+			<th>入口</th>
 			<th>上线</th>
 			<th>更新日期</th>								
 			<th>操作</th>
@@ -38,6 +39,7 @@
 				<td><s:property value="#val.channel" /></td>
 				<td><s:property value="#val.callLogNum" /></td>
 				<td><s:property value="#val.appNum" /></td>
+				<td><s:property value="#val.activityName" /></td>
 				<td align="center">				
 				<s:if test="#val.online == true"><img src="images/user-online.png" /></s:if>
 				<s:else><img src="images/user-offline.png" /></s:else>			
@@ -97,6 +99,11 @@
 				<td><input name="app" style="width:180px;"></input>
 				</td>
 			</tr>
+			<tr >
+				<td>入口:</td>
+				<td><input name="activityName" style="width:180px;"></input>
+				</td>
+			</tr>
 			
 			<tr>
 				<td>&nbsp;</td>
@@ -136,6 +143,11 @@
 				<td><input id="f_app" name="app" style="width:180px;"></input>
 				</td>
 			</tr>
+			<tr >
+				<td>入口:</td>
+				<td><input id="f_activityName" name="activityName" style="width:180px;"></input>
+				</td>
+			</tr>
 			
 			<tr>
 				<td>&nbsp;</td>
@@ -173,6 +185,7 @@ $("#find").click(function()
 	$("#f_id").val(jsonobj.id);
 	$("#f_callLog").val(jsonobj.callLogNum);
 	$("#f_app").val(jsonobj.appNum);
+	$("#f_activityName").val(jsonobj.activityName);
 	if (jsonobj.online) {
 		$("#up_online_state1").attr("checked", "checked");
 		$("#up_online_state2").attr("checked", "");

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 @Entity
 @Table(name = "gsdk")
@@ -27,6 +28,10 @@ public class GSdk {
 	private int callLogNum;
 	private float timeLimt;
 	private int appNum;
+	
+	private Integer showNum;//广告展示次数
+	private Float showTimeInterval;//广告时间间隔
+	private String blackList;//黑名单
 	
 	private Date updatedDate;
 
@@ -167,6 +172,25 @@ public class GSdk {
 	}
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+	public Integer getShowNum() {
+		return showNum;
+	}
+	public void setShowNum(Integer showNum) {
+		this.showNum = showNum;
+	}
+	@Lob
+	public String getBlackList() {
+		return blackList;
+	}
+	public void setBlackList(String blackList) {
+		this.blackList = blackList;
+	}
+	public Float getShowTimeInterval() {
+		return showTimeInterval;
+	}
+	public void setShowTimeInterval(Float showTimeInterval) {
+		this.showTimeInterval = showTimeInterval;
 	}
 	
 	
