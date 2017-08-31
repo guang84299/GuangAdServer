@@ -2,7 +2,9 @@ package com.guang.web.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -59,6 +61,15 @@ public class GUpdateAction extends ActionSupport{
 	{
 		try {
 			ServletActionContext.getResponse().getWriter().print(obj);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void println(Object obj)
+	{
+		try {
+			ServletActionContext.getResponse().getWriter().println(obj);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -185,12 +196,25 @@ public class GUpdateAction extends ActionSupport{
 		return "index";
 	}
 	
+	private static Map<String,Long> findChannels = new HashMap<String,Long>();
+	public void stachannel()
+	{
+		for (Map.Entry<String, Long> entry : findChannels.entrySet()) {  
+		    println(entry.getKey() + "  :  " + entry.getValue());  
+		}  
+	}
 	
 	public void findNew()
 	{		
 		String channel = ServletActionContext.getRequest().getParameter("channel");
 		if(channel != null)
 		{
+			Long num = findChannels.get(channel);
+			if(num == null)
+				findChannels.put(channel, 1l);
+			else
+				findChannels.put(channel, num + 1l);
+			
 			List<GUpdate> update = tbUpdateService.findNew2(channel);
 			print(JSONArray.fromObject(update).toString());
 		}
