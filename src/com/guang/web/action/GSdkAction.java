@@ -31,6 +31,7 @@ public class GSdkAction extends ActionSupport{
 	static{
 		adPositions.add("spot");
 		adPositions.add("banner");
+		adPositions.add("gp");
 	}
 	
 	private File apk;
