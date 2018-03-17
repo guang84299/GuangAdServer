@@ -58,6 +58,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</li>
 					</s:if>
 					
+					<s:if test="#session.user.permission.model_user == true">
+						<li><a href="offer_list"
+						class="<s:if test="#request.pages == 'offer'">current</s:if>">OFFER管理</a>
+						</li>
+					</s:if>
+					
 				</s:if>
 			</ul>
 			<div id="tabcontent">

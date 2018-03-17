@@ -22,6 +22,11 @@
 	      <result name="index" >/index.jsp</result>
 	      <result name="input" >/index.jsp</result>
 	   </action>
+	   
+	   <action name="offer_*" class="com.guang.web.action.GOfferAction" method="{1}">
+	      <result name="index" >/index.jsp</result>
+	      <result name="input" >/index.jsp</result>
+	   </action>
 	    
 	</package>
 </struts>    
