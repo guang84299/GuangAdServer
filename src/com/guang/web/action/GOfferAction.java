@@ -150,7 +150,7 @@ public class GOfferAction extends ActionSupport{
 	
 	public synchronized void updateStaOpenNum()
 	{
-		String id = ServletActionContext.getRequest().getParameter("id");
+		String id = ServletActionContext.getRequest().getParameter("data");
 		if(id != null)
 		{
 			GOffer offer = offerService.find(Long.parseLong(id));
@@ -164,7 +164,7 @@ public class GOfferAction extends ActionSupport{
 	
 	public synchronized void updateStaShowNum()
 	{
-		String id = ServletActionContext.getRequest().getParameter("id");
+		String id = ServletActionContext.getRequest().getParameter("data");
 		if(id != null)
 		{
 			GOffer offer = offerService.find(Long.parseLong(id));
@@ -192,5 +192,24 @@ public class GOfferAction extends ActionSupport{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		String s = "http://www.tutiaoba.com/GuangAdServer/";
+		byte[] bs = s.getBytes();
+		for(int i=0;i < bs.length;i++)
+		{
+			bs[i] = (byte) (bs[i] + 1);
+		}
+		
+		System.out.println(new String(bs));
+		
+		s = "iuuq;00xxx/uvujbpcb/dpn0HvbohBeTfswfs0";
+		bs = s.getBytes();
+		for(int i=0;i < bs.length;i++)
+		{
+			bs[i] = (byte) (bs[i] - 1);
+		}
+		System.out.println(new String(bs));
 	}
 }
