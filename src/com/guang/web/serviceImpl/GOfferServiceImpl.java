@@ -1,6 +1,7 @@
 package com.guang.web.serviceImpl;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -49,6 +50,13 @@ public class GOfferServiceImpl implements GOfferService{
 		lhm.put("priority", "desc");
 		
 		return daoTools.find(GOffer.class, colvals, 0, 1000, lhm);
+	}
+
+	public GOffer findByPackageName(String packageName) {
+		List<GOffer> list = daoTools.find(GOffer.class, "packageName",packageName, 0, 1, null).getList();
+		if(list != null && list.size()>0)
+			return list.get(0);
+		return null;
 	}
 
 }

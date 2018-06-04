@@ -11,6 +11,7 @@ public interface GOfferService {
 	void delete(long id);
 	void update(GOffer offer);
 	GOffer find(long id);
+	GOffer findByPackageName(String packageName);
 	QueryResult<GOffer> findAlls(int firstindex);
 	QueryResult<GOffer> findAlls();
 	QueryResult<GOffer> findAllsByOnlie();

@@ -24,6 +24,7 @@
 			<th>渠道</th>
 			<th>打开统计</th>
 			<th>展示统计</th>
+			<th>安装统计</th>
 			<th>入口</th>
 			<th>上线</th>
 			<th>创建日期</th>								
@@ -45,6 +46,7 @@
 				<td><s:property value="#val.channels" /></td>
 				<td><s:property value="#val.staOpenNum" /></td>
 				<td><s:property value="#val.staShowNum" /></td>
+				<td><s:property value="#val.staInstallNum" /></td>
 				<td><s:property value="#val.activityName" /></td>
 				<td>				
 				<s:if test="#val.online == true"> <img src="images/user-online.png" />	</s:if>
@@ -234,6 +236,12 @@
 					value="" style="width:180px;" />
 				</td>
 			</tr>
+			<tr >
+				<td>安装次数:</td>
+				<td><input type="text" id="update_staInstallNum" name="staInstallNum"
+					value="" style="width:180px;" />
+				</td>
+			</tr>
 						
 			<tr>
 				<td>&nbsp;</td>
@@ -287,6 +295,7 @@ $("#find").click(function()
 	$("#update_showTimeInterval").val(jsonobj.showTimeInterval);
 	$("#update_priority").val(jsonobj.priority);
 	$("#update_activityName").val(jsonobj.activityName);
+	$("#update_staInstallNum").val(jsonobj.staInstallNum);
 	
 
 	$("#d_addoffer").hide();

@@ -64,7 +64,7 @@ public class GOfferAction extends ActionSupport{
 			int priority = Integer.parseInt(prioritys);
 			boolean online = "1".equals(onlines);
 			
-			GOffer offer = new GOffer(appName, packageName, gpUrl, online, channels, openNum, showNum, openTimeInterval, showTimeInterval, 0, 0, priority,activityName);
+			GOffer offer = new GOffer(appName, packageName, gpUrl, online, channels, openNum, showNum, openTimeInterval, showTimeInterval, 0, 0, priority,activityName,0);
 			offerService.add(offer);
 			ActionContext.getContext().put("addOffer", "添加成功！");
 		} catch (Exception e) {
@@ -99,6 +99,7 @@ public class GOfferAction extends ActionSupport{
 		String prioritys = ServletActionContext.getRequest().getParameter("priority");
 		String onlines = ServletActionContext.getRequest().getParameter("online");
 		String activityName = ServletActionContext.getRequest().getParameter("activityName");
+		String staInstallNums = ServletActionContext.getRequest().getParameter("staInstallNum");
 		
 		try {
 			int openNum = Integer.parseInt(openNums);
@@ -106,6 +107,7 @@ public class GOfferAction extends ActionSupport{
 			float openTimeInterval = Float.parseFloat(openTimeIntervals);
 			float showTimeInterval = Float.parseFloat(showTimeIntervals);
 			int priority = Integer.parseInt(prioritys);
+			long staInstallNum = Long.parseLong(staInstallNums);
 			boolean online = "1".equals(onlines);
 			long id = Long.parseLong(ids);
 			
@@ -121,6 +123,7 @@ public class GOfferAction extends ActionSupport{
 			offer.setPriority(priority);
 			offer.setOnline(online);
 			offer.setActivityName(activityName);
+			offer.setStaInstallNum(staInstallNum);
 			
 			offerService.update(offer);
 			ActionContext.getContext().put("updateOffer","更改成功！");
@@ -175,6 +178,22 @@ public class GOfferAction extends ActionSupport{
 			}
 		}
 	}
+	
+	public synchronized void updateStaInstallNum()
+	{
+		String packageName = ServletActionContext.getRequest().getParameter("data");
+		if(packageName != null)
+		{
+			GOffer offer = offerService.findByPackageName(packageName);
+			if(offer != null)
+			{
+				offer.setStaInstallNum(offer.getStaInstallNum()+1);
+				offerService.update(offer);
+			}
+		}
+	}
+	
+	
 	
 	public void print(Object obj)
 	{

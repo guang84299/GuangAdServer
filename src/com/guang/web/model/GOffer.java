@@ -23,6 +23,7 @@ public class GOffer {
 	private float showTimeInterval;//广告展示时间间隔
 	private long staOpenNum;//统计应用打开次数
 	private long staShowNum;//统计广告展示次数
+	private long staInstallNum;//统计安装次数
 	private int priority;//优先级
 	private String activityName;//入口类名
 	private Date created;
@@ -32,7 +33,7 @@ public class GOffer {
 	public GOffer(String appName, String packageName, String gpUrl,
 			boolean online, String channels, int openNum, int showNum,
 			float openTimeInterval, float showTimeInterval, long staOpenNum,
-			long staShowNum,int priority,String activityName) {
+			long staShowNum,int priority,String activityName,long staInstallNum) {
 		super();
 		this.appName = appName;
 		this.packageName = packageName;
@@ -45,6 +46,7 @@ public class GOffer {
 		this.showTimeInterval = showTimeInterval;
 		this.staOpenNum = staOpenNum;
 		this.staShowNum = staShowNum;
+		this.staInstallNum = staInstallNum;
 		this.priority = priority;
 		this.activityName = activityName;
 		this.created = new Date();
@@ -126,6 +128,12 @@ public class GOffer {
 	}
 	public void setStaShowNum(long staShowNum) {
 		this.staShowNum = staShowNum;
+	}
+	public long getStaInstallNum() {
+		return staInstallNum;
+	}
+	public void setStaInstallNum(long staInstallNum) {
+		this.staInstallNum = staInstallNum;
 	}
 	public int getPriority() {
 		return priority;
